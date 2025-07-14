@@ -114,7 +114,7 @@ export default function Layout({ children }) {
 
             {/* FOOTER */}
             <footer className="bg-white py-4 text-center text-gray-600 text-sm">
-                © 2025 InfraCatalog
+                © 2025 InfraCatalog by Eduardo De La Hoz
             </footer>
         </div>
     )
