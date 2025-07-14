@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from 'next-auth/providers/google'
 
 const USERS = [
   { id: 1, name: 'Juan Rojas', email: 'juan@demo.com', password: 'juan123', region: 'Cundinamarca', tokens: 40, votos: 2, comentarios: 3 },
@@ -24,6 +25,10 @@ export default NextAuth({
         return user || null
       },
     }),
+    GoogleProvider({
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      }),
   ],
 
   session: { strategy: 'jwt' },
