@@ -59,9 +59,13 @@ export default NextAuth({
       return session
     },
     async redirect({ url, baseUrl }) {
-      if (url === '/api/auth/signout') return baseUrl
-      if (url === '/api/auth/callback/credentials') return `${baseUrl}/profile`
-      return url.startsWith(baseUrl) ? url : baseUrl
-    },
+        if (url === '/api/auth/signout') return baseUrl
+    
+        if (url === '/api/auth/callback/credentials') return `${baseUrl}/profile`
+    
+        if (url === '/api/auth/callback/google') return `${baseUrl}/profile`
+    
+        return url.startsWith(baseUrl) ? url : baseUrl
+      },
   },
 })

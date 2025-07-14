@@ -18,7 +18,7 @@ export default function Layout({ children }) {
     ]
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-50 text-gray-800 font-sans">
+        <div className="flex flex-col min-h-screen bg-gray-50 text-gray-800 font-sans select-none">
             {/* HEADER */}
             <header className="bg-white shadow">
                 <nav className="max-w-6xl mx-auto flex items-center justify-between p-4">
