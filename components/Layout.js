@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import UserMenu from './UserMenu'
+import FloatingBot from './FloatingBot'
 
 
 export default function Layout({ children }) {
@@ -22,8 +23,9 @@ export default function Layout({ children }) {
             {/* HEADER */}
             <header className="bg-white shadow">
                 <nav className="max-w-6xl mx-auto flex items-center justify-between p-4">
-                    <Link href="/" className="text-2xl font-bold">
-                        InfraCatalog
+                    <Link href="/" className="flex items-center space-x-2">
+                        <img src="/logo.png" alt="InfraCatalog Logo" className="w-16 h-16 sm:w-14 sm:h-14" />
+                        <span className="text-2xl font-bold text-gray-800 hidden sm:inline">InfraCatalog</span>
                     </Link>
 
                     {/* Desktop Menu */}
@@ -110,7 +112,8 @@ export default function Layout({ children }) {
             <main className="flex-1">{children}</main>
 
             {/* FLOATING FEEDBACK BUTTON */}
-
+            
+            <FloatingBot />
 
             {/* FOOTER */}
             <footer className="bg-white py-4 text-center text-gray-600 text-sm">

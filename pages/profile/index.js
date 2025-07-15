@@ -1,12 +1,20 @@
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import RegionModal from '@/components/RegionModal'
+import { useRouter } from 'next/router'
+
 
 export default function ProfilePage() {
   const { data: session, status } = useSession()
   const [showRegionModal, setShowRegionModal] = useState(false)
   const [region, setRegion] = useState(null)
+  const router = useRouter()
 
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.replace('/login') 
+    }
+  }, [status, router])
   useEffect(() => {
     if (session?.user) {
       if (session.user.region) {

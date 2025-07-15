@@ -1,20 +1,12 @@
+"use client"
 import { FaBalanceScaleLeft, FaVoteYea, FaInfoCircle } from 'react-icons/fa'
+import useVotes from '@/hooks/useVotes'
+import VoteCard from '@/components/VoteCard'
 
 export default function GovernancePage() {
-  const votes = [
-    {
-      id: 1,
-      title: '¿Aprueba la extensión del Parque Metropolitano Verde?',
-      status: 'Abierta',
-      fechaLimite: '15 de julio de 2025',
-    },
-    {
-      id: 2,
-      title: 'Asignación de presupuesto para mejoramiento vial sector sur',
-      status: 'Cerrada',
-      fechaLimite: '05 de julio de 2025',
-    },  
-  ]
+  const { votes, loading, vote } = useVotes()
+
+
 
   return (
     <div className="min-h-screen bg-gray-50 p-6 sm:p-12">
@@ -47,31 +39,15 @@ export default function GovernancePage() {
           <FaBalanceScaleLeft className="text-blue-500" />
           Votaciones
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {votes.map((vote) => (
-            <div
-              key={vote.id}
-              className="bg-white rounded-lg p-5 shadow hover:shadow-md transition"
-            >
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">{vote.title}</h3>
-              <p className="text-sm text-gray-600">Fecha límite: {vote.fechaLimite}</p>
-              <span
-                className={`inline-block mt-3 px-3 py-1 text-xs rounded-full font-medium ${
-                  vote.status === 'Abierta'
-                    ? 'bg-green-100 text-green-700'
-                    : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                {vote.status}
-              </span>
-              {vote.status === 'Abierta' && (
-                <button className="mt-4 block w-full text-sm bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
-                  Votar ahora
-                </button>
-              )}
+          {loading ? (
+            <p>Cargando votaciones…</p>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center">
+              {votes.map(v => (
+                <VoteCard key={v.id} vote={v} onVote={(choice) => vote(v.id, choice)} className="animate-fade-in" />
+              ))}
             </div>
-          ))}
-        </div>
+          )}
       </section>
     </div>
   )

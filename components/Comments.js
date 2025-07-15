@@ -53,6 +53,7 @@ export default function Comments({ projectId }) {
             setLoadingIA(false)
         }
     }
+    
 
     return (
         <section className="mt-12 max-w-3xl mx-auto">
@@ -60,13 +61,22 @@ export default function Comments({ projectId }) {
                 <h2 className="text-2xl font-bold text-gray-800">Comentarios</h2>
                 {!insight && comments.length >= 3 && (
                     <button
-                        onClick={getInsight}
-                        disabled={loadingIA}
-                        className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-md shadow transition"
-                    >
-                        <FaRobot />
-                        {loadingIA ? 'Analizando...' : 'Ver análisis con IA'}
-                    </button>
+                    onClick={getInsight}
+                    disabled={loadingIA}
+                    className={`group relative inline-flex items-center gap-3 px-5 py-2.5 rounded-full border text-sm font-medium shadow-md transition-all ${
+                      loadingIA
+                        ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                        : 'bg-white text-blue-700 border-blue-500 hover:bg-blue-50 hover:shadow-lg'
+                    }`}
+                  >
+                    <span className={`rounded-full p-2 transition ${
+                      loadingIA ? 'bg-gray-300' : 'bg-blue-100 group-hover:bg-blue-200'
+                    }`}>
+                      <FaRobot className="h-5 w-5" />
+                    </span>
+                    <span>{loadingIA ? 'Analizando...' : 'Ver análisis generado por IA'}</span>
+                  </button>
+                  
                 )}
             </div>
 
